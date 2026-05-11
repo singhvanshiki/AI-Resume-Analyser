@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-service
+spec:
+  selector:
+    app: resume-service
+  ports:
+    - port: 8000
+      targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resume-service
+  template:
+    metadata:
+      labels:
+        app: resume-service
+    spec:
+      containers:
+        - name: resume-service
+          image: ai-resume-analyzer/resume-service:latest
+          env:
+            - name: DATABASE_URL
+              value: postgresql+asyncpg://resume:resume_pass@postgres:5432/resume_ai
+            - name: MINIO_ENDPOINT
+              value: minio:9000
+            - name: MINIO_ACCESS_KEY
+              value: minioadmin
+            - name: MINIO_SECRET_KEY
+              value: minioadmin
+            - name: MINIO_BUCKET
+              value: resumes
+          ports:
+            - containerPort: 8000
