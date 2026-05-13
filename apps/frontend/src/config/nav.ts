@@ -53,13 +53,6 @@ export const studentNavSections: NavSection[] = [
     title: "Insights",
     items: [
       { title: "ATS Score", href: "/student/ats-score", icon: Gauge },
-      { title: "Resume Analysis", href: "/student/analysis", icon: FileSearch },
-      { title: "Skill Gap", href: "/student/skill-gap", icon: ListChecks },
-      {
-        title: "Resume Suggestions",
-        href: "/student/suggestions",
-        icon: Wand2,
-      },
       { title: "Resume Summary", href: "/student/summary", icon: Sparkles },
       {
         title: "Cover Letter",
